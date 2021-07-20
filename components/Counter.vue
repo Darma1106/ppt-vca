@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 const props = defineProps({
   count: {
@@ -8,6 +8,12 @@ const props = defineProps({
 })
 
 const counter = ref(props.count)
+
+watch(counter, (val) => {
+  if (val == 15) {
+    alert('15了')
+  }
+})
 </script>
 
 <template>

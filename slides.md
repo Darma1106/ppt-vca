@@ -3,7 +3,7 @@
 theme: seriph
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
-background: https://source.unsplash.com/collection/94734566/1920x1080
+# background: https://source.unsplash.com/collection/94734566/1920x1080
 # apply any windi css classes to the current slide
 class: 'text-center'
 # https://sli.dev/custom/highlighters.html
@@ -36,46 +36,58 @@ Presentation slides for developers
   </a>
 </div>
 
-
 <!--
 The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
 -->
 
 ---
 
-# What is Slidev?
+# 什么是 compositionApi?
 
-```ts {monaco}
-import {ref} from 'vue'
+<ul>vue3发布beta版本的时候，尤雨溪发布了两个形式的写法:
+      <li>options-api</li>
+      <p>options-api指的就是原vue2所常用的写法，以data、methods、watch等选项构造出一个vue组件</p>
+</ul>
 
+<Counter :count="10" m="t-4" />
 
-
-
-
-
-
-
-
-
+```js {monaco}
+export default {
+  data() {
+    return {
+      count: 10
+    }
+  },
+  methods: {}
+}
 ```
 
+---
 
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/guide/syntax#embedded-styles
--->
+# 什么是 compositionApi?
 
-<!-- <style>
-h1 {
-  background-color: #2B90B6;
-  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent; 
-  -moz-text-fill-color: transparent;
-}
-</style> -->
+<ul>
+      <li>composition-api</li>
+      <p>composition-api则是把各个选项抽离成方法，与vue对象解耦</p>
+</ul>
+
+<Counter :count="10" m="t-4" />
+
+```js {monaco}
+import { defineComponent, ref } from 'vue'
+export default defineComponent({
+  setup() {
+    const count = ref(10)
+    const countReduce = () => {
+      count.value--
+    }
+    const countAdd = () => {
+      count.value++
+    }
+    return { count, countReduce, countAdd }
+  }
+})
+```
 
 ---
 
@@ -85,24 +97,28 @@ Hover on the bottom-left corner to see the navigation's controls panel, [learn m
 
 ### Keyboard Shortcuts
 
-|     |     |
-| --- | --- |
-| <kbd>right</kbd> / <kbd>space</kbd>| next animation or slide |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd> | previous slide |
-| <kbd>down</kbd> | next slide |
+|                                                    |                             |
+| -------------------------------------------------- | --------------------------- |
+| <kbd>right</kbd> / <kbd>space</kbd>                | next animation or slide     |
+| <kbd>left</kbd> / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
+| <kbd>up</kbd>                                      | previous slide              |
+| <kbd>down</kbd>                                    | next slide                  |
 
 <!-- https://sli.dev/guide/animations.html#click-animations -->
+
 <img
   v-click
   class="absolute -bottom-9 -left-7 w-80 opacity-50"
   src="https://sli.dev/assets/arrow-bottom-left.svg"
 />
+
 <p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
 
 ---
+
 layout: image-right
 image: https://source.unsplash.com/collection/94734566/1920x1080
+
 ---
 
 # Code
@@ -119,7 +135,7 @@ interface User {
 
 function updateUser(id: number, update: User) {
   const user = getUser(id)
-  const newUser = {...user, ...update}  
+  const newUser = { ...user, ...update }
   saveUser(id, newUser)
 }
 ```
@@ -172,10 +188,9 @@ Check out [the guides](https://sli.dev/builtin/components.html) for more.
 </div>
 </div>
 
+---
 
----
-class: px-20
----
+## class: px-20
 
 # Themes
 
@@ -205,20 +220,15 @@ Read more about [How to use a theme](https://sli.dev/themes/use.html) and
 check out the [Awesome Themes Gallery](https://sli.dev/themes/gallery.html).
 
 ---
-preload: false
----
+
+## preload: false
 
 # Animations
 
 Animations are powered by [@vueuse/motion](https://motion.vueuse.org/).
 
 ```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }">
-  Slidev
-</div>
+<div v-motion :initial="{ x: -80 }" :enter="{ x: 0 }">Slidev</div>
 ```
 
 <div class="w-60 relative mt-6">
@@ -291,6 +301,7 @@ LaTeX is supported out-of-box powered by [KaTeX](https://katex.org/).
 Inline $\sqrt{3x-1}+(1+x)^2$
 
 Block
+
 $$
 \begin{array}{c}
 
@@ -333,10 +344,11 @@ C -->|Two| E[Result 2]
 
 [Learn More](https://sli.dev/guide/syntax.html#diagrams)
 
-
 ---
+
 layout: center
 class: text-center
+
 ---
 
 # Learn More

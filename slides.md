@@ -18,11 +18,9 @@ info: |
 
 # vue composition api
 
-Presentation slides for developers
-
 <div class="pt-12">
   <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
-    Press Space for next page <carbon:arrow-right class="inline"/>
+    by Darma <carbon:arrow-right class="inline"/>
   </span>
 </div>
 
@@ -30,7 +28,7 @@ Presentation slides for developers
   <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="text-xl icon-btn opacity-50 !border-none !hover:text-white">
     <carbon:edit />
   </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" alt="GitHub"
+  <a href="https://github.com/Darma1106" target="_blank" alt="GitHub"
     class="text-xl icon-btn opacity-50 !border-none !hover:text-white">
     <carbon-logo-github />
   </a>
@@ -113,12 +111,14 @@ export default defineComponent({
 
 # useDate
 
-```ts {all|1,2,5|1,10-14|1,16-18|all}
-import { ref, onMounted, onUnmounted, Ref } from 'vue'
+```ts {all|1,2,3,7|1,12-16|1,18-20|all}
+import { ref, onMounted, onUnmounted } from 'vue'
 import dayjs from 'dayjs'
+import type { Ref } from 'vue'
+import type { ConfigType, Dayjs } from 'dayjs'
 
-export default function useDate(d: dayjs.ConfigType = Date.now(), timeout = 0): Ref<dayjs.Dayjs> {
-  const date: Ref<dayjs.Dayjs> = ref(dayjs(d))
+export default function useDate(d: ConfigType = Date.now(), timeout = 0): Ref<Dayjs> {
+  const date: Ref<Dayjs> = ref(dayjs(d))
 
   if (timeout) {
     let timerId: number
@@ -135,6 +135,22 @@ export default function useDate(d: dayjs.ConfigType = Date.now(), timeout = 0): 
   }
 
   return date
+}
+```
+
+---
+
+# typescript
+
+```ts {monaco}
+interface Info {
+  name: string
+  id: string
+}
+
+const info: Info = {
+  name: 'name',
+  id: 'id'
 }
 ```
 
@@ -159,3 +175,7 @@ export default class Home extends Vue {
   }
 }
 ```
+
+---
+
+<VideoImg />
